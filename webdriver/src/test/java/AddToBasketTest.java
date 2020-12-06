@@ -76,7 +76,7 @@ public class AddToBasketTest {
                 .until(ExpectedConditions
                         .presenceOfAllElementsLocatedBy(By.className(ITEM_TITLE_CLASSNAME))).get(0);
 
-        System.out.println("Enter 4");
+        System.out.println("Enter 3");
 
         Assert.assertEquals(basketItemsCounterValue + 1, (int) basketItemsCounterValueAfterAdding);
         Assert.assertEquals(itemTitle.getText(), ITEM_TITLE_VALUE);
