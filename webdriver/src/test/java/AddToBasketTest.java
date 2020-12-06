@@ -3,18 +3,21 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
+import java.util.List;
 
 public class AddToBasketTest {
     private final String CHROME_DRIVER_PATH = "/drivers/chromedriver";
     private final String PAGE_URL = "https://cutt.ly/IhmH8m3"; // short link
-//    private final String PAGE_URL = "https://deal.by/p115977873-naruchnye-chasy-amst.html?_openstat=by_prosale%3B%D1%87%D0%B0%D1%81%D1%8B+%D0%BD%D0%B0%D1%80%D1%83%D1%87%D0%BD%D1%8B%D0%B5+%D0%B8+%D0%BA%D0%B0%D1%80%D0%BC%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5%3B%D0%9D%D0%90%D0%A0%D0%A3%D0%A7%D0%9D%D0%AB%D0%95++%D0%A7%D0%90%D0%A1%D0%AB+AMST%3Bsearch";
     private final String BUY_BUTTON_CLASSNAME = "js-product-buy-button";
+    private final String BASKET_ITEMS_COUNTER_CLASSNAME = "x-header__controls-counter";
+    private final String ITEM_TITLE_CLASSNAME = "x-shc-item__title-link";
+    private final String ITEM_TITLE_VALUE = "НАРУЧНЫЕ ЧАСЫ AMST";
 
     private final long SECONDS_TO_WAIT = 10;
     private final long POLLING_SECONDS = 1;
@@ -39,13 +42,44 @@ public class AddToBasketTest {
                 .pollingEvery(Duration.ofSeconds(POLLING_SECONDS))
                 .ignoring(NoSuchElementException.class)
                 .ignoring(StaleElementReferenceException.class)
-                .withMessage("Timeout for waiting was exceeded!");
+                .withMessage("Timeout was exceeded!");
+
+        System.out.println("Enter 0");
 
         WebElement buyButton = wait
                 .until(ExpectedConditions
                         .presenceOfAllElementsLocatedBy(By.className(BUY_BUTTON_CLASSNAME))).get(0);
 
         System.out.println("buyButton: " + buyButton);
+
+        List<WebElement> basketItemsCounters = driver.findElements(By.className(BASKET_ITEMS_COUNTER_CLASSNAME));
+        Integer basketItemsCounterValue = 0;
+        if (basketItemsCounters.size() != 0) {
+            basketItemsCounterValue = Integer.parseInt(basketItemsCounters.get(0).getText());
+        }
+
+        System.out.println("basketItemsCounterValue: " + basketItemsCounterValue);
+
+        buyButton.click();
+
+        System.out.println("Enter 1");
+
+        WebElement basketItemsCounter = wait
+                .until(ExpectedConditions
+                        .presenceOfAllElementsLocatedBy(By.className(BASKET_ITEMS_COUNTER_CLASSNAME))).get(0);
+
+        System.out.println("Enter 2");
+
+        Integer basketItemsCounterValueAfterAdding = Integer.parseInt(basketItemsCounter.getText());
+
+        WebElement itemTitle = wait
+                .until(ExpectedConditions
+                        .presenceOfAllElementsLocatedBy(By.className(ITEM_TITLE_CLASSNAME))).get(0);
+
+        System.out.println("Enter 4");
+
+        Assert.assertEquals(basketItemsCounterValue + 1, (int) basketItemsCounterValueAfterAdding);
+        Assert.assertEquals(itemTitle.getText(), ITEM_TITLE_VALUE);
     }
 
     @AfterMethod(alwaysRun = true)
