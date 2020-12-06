@@ -44,13 +44,9 @@ public class AddToBasketTest {
                 .ignoring(StaleElementReferenceException.class)
                 .withMessage("Timeout was exceeded!");
 
-        System.out.println("Enter 0");
-
         WebElement buyButton = wait
                 .until(ExpectedConditions
                         .presenceOfAllElementsLocatedBy(By.className(BUY_BUTTON_CLASSNAME))).get(0);
-
-        System.out.println("buyButton: " + buyButton);
 
         List<WebElement> basketItemsCounters = driver.findElements(By.className(BASKET_ITEMS_COUNTER_CLASSNAME));
         Integer basketItemsCounterValue = 0;
@@ -58,25 +54,17 @@ public class AddToBasketTest {
             basketItemsCounterValue = Integer.parseInt(basketItemsCounters.get(0).getText());
         }
 
-        System.out.println("basketItemsCounterValue: " + basketItemsCounterValue);
-
         buyButton.click();
-
-        System.out.println("Enter 1");
 
         WebElement basketItemsCounter = wait
                 .until(ExpectedConditions
                         .presenceOfAllElementsLocatedBy(By.className(BASKET_ITEMS_COUNTER_CLASSNAME))).get(0);
-
-        System.out.println("Enter 2");
 
         Integer basketItemsCounterValueAfterAdding = Integer.parseInt(basketItemsCounter.getText());
 
         WebElement itemTitle = wait
                 .until(ExpectedConditions
                         .presenceOfAllElementsLocatedBy(By.className(ITEM_TITLE_CLASSNAME))).get(0);
-
-        System.out.println("Enter 3");
 
         Assert.assertEquals(basketItemsCounterValue + 1, (int) basketItemsCounterValueAfterAdding);
         Assert.assertEquals(itemTitle.getText(), ITEM_TITLE_VALUE);
