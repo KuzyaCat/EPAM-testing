@@ -24,7 +24,6 @@ public class DealByTest {
     private final long SECONDS_TO_WAIT = 10;
     private final long POLLING_SECONDS = 1;
     private WebDriver driver;
-    private JavascriptExecutor jsExecutor;
 
     @BeforeTest(alwaysRun = true)
     public void initBrowserDriver() {
@@ -32,7 +31,6 @@ public class DealByTest {
         System.setProperty("webdriver.chrome.driver", path + CHROME_DRIVER_PATH);
 
         driver = new ChromeDriver();
-        jsExecutor = (JavascriptExecutor) driver;
     }
 
     @Test (description = "Test add to basket")
