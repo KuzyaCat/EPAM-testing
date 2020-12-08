@@ -12,7 +12,7 @@ import java.time.Duration;
 import java.util.List;
 
 public class AddToBasketTest {
-    private final String CHROME_DRIVER_PATH = "/drivers/chromedriver";
+    private final String CHROME_DRIVER_PATH = "/src/main/resources/drivers/chromedriver";
     private final String PAGE_URL = "https://cutt.ly/IhmH8m3"; // short link
     private final String BUY_BUTTON_CLASSNAME = "js-product-buy-button";
     private final String BASKET_ITEMS_COUNTER_CLASSNAME = "x-header__controls-counter";
@@ -60,13 +60,13 @@ public class AddToBasketTest {
                 .until(ExpectedConditions
                         .presenceOfAllElementsLocatedBy(By.className(BASKET_ITEMS_COUNTER_CLASSNAME))).get(0);
 
-        Integer basketItemsCounterValueAfterAdding = Integer.parseInt(basketItemsCounter.getText());
+        int basketItemsCounterValueAfterAdding = Integer.parseInt(basketItemsCounter.getText());
 
         WebElement itemTitle = wait
                 .until(ExpectedConditions
                         .presenceOfAllElementsLocatedBy(By.className(ITEM_TITLE_CLASSNAME))).get(0);
 
-        Assert.assertEquals(basketItemsCounterValue + 1, (int) basketItemsCounterValueAfterAdding);
+        Assert.assertEquals(basketItemsCounterValue + 1, basketItemsCounterValueAfterAdding);
         Assert.assertEquals(itemTitle.getText(), ITEM_TITLE_VALUE);
     }
 
