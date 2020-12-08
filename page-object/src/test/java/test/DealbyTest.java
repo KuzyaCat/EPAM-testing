@@ -1,3 +1,5 @@
+package test;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -11,7 +13,7 @@ import org.testng.annotations.Test;
 import java.time.Duration;
 import java.util.List;
 
-public class AddToBasketTest {
+public class DealByTest {
     private final String CHROME_DRIVER_PATH = "/src/main/resources/drivers/chromedriver";
     private final String PAGE_URL = "https://cutt.ly/IhmH8m3"; // short link
     private final String BUY_BUTTON_CLASSNAME = "js-product-buy-button";
@@ -76,3 +78,4 @@ public class AddToBasketTest {
         driver = null;
     }
 }
+
