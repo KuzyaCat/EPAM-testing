@@ -1,23 +1,38 @@
 package page;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
+
+import java.time.Duration;
 
 public class DealByWristWatchPage extends Page {
     private final String PAGE_URL = "https://cutt.ly/IhmH8m3"; // short link
+    private final String BUY_BUTTON_CLASSNAME = "js-product-buy-button";
+    private final String BASKET_ITEMS_COUNTER_CLASSNAME = "x-header__controls-counter";
+    private final String ITEM_TITLE_CLASSNAME = "x-shc-item__title-link";
 
-    @FindBy(className = "js-product-buy-button")
+    Wait<WebDriver> wait;
+    private final long SECONDS_TO_WAIT = 10;
+    private final long POLLING_SECONDS = 1;
+
+
+    @FindBy(className = BUY_BUTTON_CLASSNAME)
     private WebElement buyButton;
 
-    @FindBy(className = "x-header__controls-counter")
     private WebElement basketItemsCounter;
-
-    @FindBy(className = "x-shc-item__title-link")
     private WebElement itemTitle;
 
     public DealByWristWatchPage(WebDriver driver) {
         super(driver);
+        wait = new FluentWait<>(driver)
+                .withTimeout(Duration.ofSeconds(SECONDS_TO_WAIT))
+                .pollingEvery(Duration.ofSeconds(POLLING_SECONDS))
+                .ignoring(NoSuchElementException.class)
+                .ignoring(StaleElementReferenceException.class)
+                .withMessage("Timeout was exceeded!");
     }
 
     public DealByWristWatchPage clickBuyButton() {
@@ -25,8 +40,26 @@ public class DealByWristWatchPage extends Page {
         return this;
     }
 
+    public DealByWristWatchPage selectBasketItemsCounter() {
+        basketItemsCounter = wait
+                .until(ExpectedConditions
+                        .presenceOfAllElementsLocatedBy(By.className(BASKET_ITEMS_COUNTER_CLASSNAME))).get(0);
+        return this;
+    }
+
+    public DealByWristWatchPage selectItemTitle() {
+        itemTitle = wait
+                .until(ExpectedConditions
+                        .presenceOfAllElementsLocatedBy(By.className(ITEM_TITLE_CLASSNAME))).get(0);
+        return this;
+    }
+
     public int getBasketItemsCounterValue() {
-        return Integer.parseInt(basketItemsCounter.getText());
+        try {
+            return Integer.parseInt(basketItemsCounter.getText());
+        } catch (NoSuchElementException exception) {
+            return 0;
+        }
     }
 
     public String getItemTitleText() {
