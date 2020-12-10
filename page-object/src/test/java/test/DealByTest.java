@@ -6,11 +6,14 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import page.DealByWristWatchPage;
+import page.ManSneakersPage;
+import page.WristWatchPage;
 
 public class DealByTest {
     private final String CHROME_DRIVER_PATH = "/src/main/resources/drivers/chromedriver";
     private final String EXPECTED_ITEM_TITLE_VALUE = "НАРУЧНЫЕ ЧАСЫ AMST";
+
+    private final String FILTER_VALUE = "re";
 
     private WebDriver driver;
 
@@ -24,7 +27,7 @@ public class DealByTest {
 
     @Test (description = "Test add to basket")
     public void addProductToBasketTest() {
-        DealByWristWatchPage dealByWristWatchPage = new DealByWristWatchPage(driver)
+        WristWatchPage dealByWristWatchPage = new WristWatchPage(driver)
                 .openPage();
 
         int expectedBasketItemsCounterValue = dealByWristWatchPage.getBasketItemsCounterValue() + 1;
@@ -39,6 +42,18 @@ public class DealByTest {
 
         Assert.assertEquals(expectedBasketItemsCounterValue, actualBasketItemsCounterValueAfterClick);
         Assert.assertEquals(actualItemTitle, EXPECTED_ITEM_TITLE_VALUE);
+    }
+
+    @Test (description = "Test filter sneakers by producer")
+    public void filterSneakersByProducerTest() {
+        boolean areProducerListItemValuesMatchInputValue = new ManSneakersPage(driver)
+                .openPage()
+                .fillFilterInput(FILTER_VALUE)
+                .getProducerListItemValues()
+                .stream()
+                .allMatch(itemValue -> itemValue.contains(FILTER_VALUE));
+
+        Assert.assertTrue(areProducerListItemValuesMatchInputValue);
     }
 
     @AfterMethod(alwaysRun = true)
