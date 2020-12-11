@@ -12,7 +12,7 @@ import java.time.Duration;
 import java.util.List;
 
 public class AddToBasketTest {
-    private final String CHROME_DRIVER_PATH = "/src/main/resources/drivers/chromedriver";
+    private final String CHROME_DRIVER_PATH = "/src/test/resources/drivers/chromedriver";
     private final String PAGE_URL = "https://cutt.ly/IhmH8m3"; // short link
     private final String BUY_BUTTON_CLASSNAME = "js-product-buy-button";
     private final String BASKET_ITEMS_COUNTER_CLASSNAME = "x-header__controls-counter";
