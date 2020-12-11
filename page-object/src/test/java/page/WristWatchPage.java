@@ -4,6 +4,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 
 public class WristWatchPage extends Page {
+    private final String BASE_PAGE_URL = "https://deal.by";
     private String pageUrl;
 
     private final String BUY_BUTTON_CLASSNAME = "js-product-buy-button";
@@ -18,7 +19,7 @@ public class WristWatchPage extends Page {
 
     public WristWatchPage(WebDriver driver, String url) {
         super(driver);
-        pageUrl = url;
+        pageUrl = BASE_PAGE_URL + url;
     }
 
     public WristWatchPage clickBuyButton() {

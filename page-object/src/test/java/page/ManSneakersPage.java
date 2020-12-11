@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ManSneakersPage extends Page {
+    private final String BASE_PAGE_URL = "https://deal.by";
     private String pageUrl;
 
     private final String PRODUCER_FILTER_PARENT_ELEMENT = "//div[(@data-qaid='a18') and (@class=\"FilterSection__root--2ST64\")]";
@@ -17,11 +18,11 @@ public class ManSneakersPage extends Page {
     private final By PRODUCER_LIST_ITEM_SPAN_LOCATOR = By.className("SingleCheckbox__label--1ObCD");
 
     @FindBy(xpath = PRODUCER_FILTER_INPUT_XPATH)
-    private WebElement filterByProducerFilterInput;
+    private WebElement producerFilterInput;
 
     public ManSneakersPage(WebDriver driver, String url) {
         super(driver);
-        pageUrl = url;
+        pageUrl = BASE_PAGE_URL + url;
     }
 
     public ManSneakersPage(WebDriver driver) {
@@ -29,7 +30,7 @@ public class ManSneakersPage extends Page {
     }
 
     public ManSneakersPage fillFilterInput(String filterValue) {
-        filterByProducerFilterInput.sendKeys(filterValue);
+        producerFilterInput.sendKeys(filterValue);
         return this;
     }
 
