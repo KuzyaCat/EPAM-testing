@@ -11,8 +11,10 @@ import page.WristWatchPage;
 
 public class DealByTest {
     private final String CHROME_DRIVER_PATH = "/src/test/resources/drivers/chromedriver";
-    private final String EXPECTED_ITEM_TITLE_VALUE = "НАРУЧНЫЕ ЧАСЫ AMST";
+    private final String WRIST_WATCH_PAGE_URL = "https://cutt.ly/IhmH8m3"; // short link
+    private final String SNEAKERS_PAGE_URL = "https://deal.by/Krossovki-muzhskie.html";
 
+    private final String EXPECTED_ITEM_TITLE_VALUE = "НАРУЧНЫЕ ЧАСЫ AMST";
     private final String FILTER_VALUE = "re";
 
     private WebDriver driver;
@@ -27,7 +29,7 @@ public class DealByTest {
 
     @Test (description = "Test add to basket")
     public void addProductToBasketTest() {
-        WristWatchPage dealByWristWatchPage = new WristWatchPage(driver)
+        WristWatchPage dealByWristWatchPage = new WristWatchPage(driver, WRIST_WATCH_PAGE_URL)
                 .openPage();
 
         int expectedBasketItemsCounterValue = dealByWristWatchPage.getBasketItemsCounterValue() + 1;
@@ -46,7 +48,7 @@ public class DealByTest {
 
     @Test (description = "Test filter sneakers by producer")
     public void filterSneakersByProducerTest() {
-        boolean areProducerListItemValuesMatchInputValue = new ManSneakersPage(driver)
+        boolean areProducerListItemValuesMatchInputValue = new ManSneakersPage(driver, SNEAKERS_PAGE_URL)
                 .openPage()
                 .fillFilterInput(FILTER_VALUE)
                 .getProducerListItemValues()
