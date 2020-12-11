@@ -23,46 +23,42 @@ public class AddToBasketTest {
     private final long POLLING_SECONDS = 1;
     private WebDriver driver;
 
+    Wait<WebDriver> wait;
+
     @BeforeTest(alwaysRun = true)
     public void initBrowserDriver() {
         String path = System.getProperty("user.dir");
         System.setProperty("webdriver.chrome.driver", path + CHROME_DRIVER_PATH);
 
         driver = new ChromeDriver();
+
+        wait = new FluentWait<>(driver)
+                .withTimeout(Duration.ofSeconds(SECONDS_TO_WAIT))
+                .pollingEvery(Duration.ofSeconds(POLLING_SECONDS))
+                .ignoring(NoSuchElementException.class)
+                .ignoring(StaleElementReferenceException.class)
+                .withMessage("Timeout was exceeded!");
     }
 
     @Test (description = "Test add to basket")
     public void addProductToBasketTest() {
         driver.get(PAGE_URL);
 
-        Wait<WebDriver> wait = new FluentWait<>(driver)
-                .withTimeout(Duration.ofSeconds(SECONDS_TO_WAIT))
-                .pollingEvery(Duration.ofSeconds(POLLING_SECONDS))
-                .ignoring(NoSuchElementException.class)
-                .ignoring(StaleElementReferenceException.class)
-                .withMessage("Timeout was exceeded!");
-
-        WebElement buyButton = wait
-                .until(ExpectedConditions
-                        .presenceOfAllElementsLocatedBy(By.className(BUY_BUTTON_CLASSNAME))).get(0);
+        WebElement buyButton = getWebElement(By.className(BUY_BUTTON_CLASSNAME));
 
         List<WebElement> basketItemsCounters = driver.findElements(By.className(BASKET_ITEMS_COUNTER_CLASSNAME));
-        Integer basketItemsCounterValue = 0;
+        int basketItemsCounterValue = 0;
         if (basketItemsCounters.size() != 0) {
             basketItemsCounterValue = Integer.parseInt(basketItemsCounters.get(0).getText());
         }
 
         buyButton.click();
 
-        WebElement basketItemsCounter = wait
-                .until(ExpectedConditions
-                        .presenceOfAllElementsLocatedBy(By.className(BASKET_ITEMS_COUNTER_CLASSNAME))).get(0);
+        int basketItemsCounterValueAfterAdding = Integer.parseInt(
+                getWebElement(By.className(BASKET_ITEMS_COUNTER_CLASSNAME)).getText()
+        );
 
-        int basketItemsCounterValueAfterAdding = Integer.parseInt(basketItemsCounter.getText());
-
-        WebElement itemTitle = wait
-                .until(ExpectedConditions
-                        .presenceOfAllElementsLocatedBy(By.className(ITEM_TITLE_CLASSNAME))).get(0);
+        WebElement itemTitle = getWebElement(By.className(ITEM_TITLE_CLASSNAME));
 
         Assert.assertEquals(basketItemsCounterValue + 1, basketItemsCounterValueAfterAdding);
         Assert.assertEquals(itemTitle.getText(), ITEM_TITLE_VALUE);
@@ -72,5 +68,9 @@ public class AddToBasketTest {
     public void quitBrowser() {
         driver.quit();
         driver = null;
+    }
+
+    private WebElement getWebElement(By locator) {
+        return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
     }
 }

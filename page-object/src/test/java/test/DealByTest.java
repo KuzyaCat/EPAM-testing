@@ -10,7 +10,7 @@ import page.ManSneakersPage;
 import page.WristWatchPage;
 
 public class DealByTest {
-    private final String CHROME_DRIVER_PATH = "\\src\\main\\resources\\drivers\\chromedriver";
+    private final String CHROME_DRIVER_PATH = "/src/main/resources/drivers/chromedriver";
     private final String EXPECTED_ITEM_TITLE_VALUE = "НАРУЧНЫЕ ЧАСЫ AMST";
 
     private final String FILTER_VALUE = "re";
