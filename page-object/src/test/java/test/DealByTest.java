@@ -51,6 +51,7 @@ public class DealByTest {
         boolean areProducerListItemValuesMatchInputValue =  new ManSneakersPage(driver, SNEAKERS_PAGE_URL)
                 .openPage()
                 .fillFilterInput(FILTER_VALUE)
+                .waitUntilJSReady()
                 .getProducerListItemValues()
                 .stream()
                 .allMatch(itemValue -> itemValue.contains(FILTER_VALUE));

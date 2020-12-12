@@ -5,6 +5,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import util.waiter.JSWaiter;
 
 import java.time.Duration;
 import java.util.List;
@@ -39,5 +41,10 @@ public abstract class Page {
 
     protected List<WebElement> getWebElementsList(By locator) {
         return wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
+    }
+
+    protected Page waitUntilJSReady() {
+        wait.until(JSWaiter.waitUntilJSReady());
+        return this;
     }
 }
