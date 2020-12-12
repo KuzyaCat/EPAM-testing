@@ -2,6 +2,7 @@ package page;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.Keys;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,8 +34,9 @@ public class ManSneakersPage extends Page {
     }
 
     public ManSneakersPage fillFilterInput(String filterValue) {
-//        producerFilterInput.sendKeys(filterValue);
-        jsExecutor.executeScript("arguments[0].setAttribute('value', arguments[1])", producerFilterInput, filterValue);
+        producerFilterInput.sendKeys(Keys.chord(filterValue));
+        producerFilterInput.sendKeys(Keys.SPACE);
+//        jsExecutor.executeScript("arguments[0].setAttribute('value', arguments[1])", producerFilterInput, filterValue);
         return this;
     }
 

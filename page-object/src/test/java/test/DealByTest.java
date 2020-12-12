@@ -15,7 +15,7 @@ public class DealByTest {
     private final String SNEAKERS_PAGE_URL = "/Krossovki-muzhskie.html";
 
     private final String EXPECTED_ITEM_TITLE_VALUE = "Мужские часы AMST AM 3003 (Коричневый)";
-    private final String FILTER_VALUE = "re";
+    private final String FILTER_VALUE = "reebo";
 
     private WebDriver driver;
 
@@ -47,7 +47,7 @@ public class DealByTest {
     }
 
     @Test (description = "Test filter sneakers by producer")
-    public void filterSneakersByProducerTest() {
+    public void filterSneakersByProducerTest() throws InterruptedException {
         boolean areProducerListItemValuesMatchInputValue =  new ManSneakersPage(driver, SNEAKERS_PAGE_URL)
                 .openPage()
                 .fillFilterInput(FILTER_VALUE)
