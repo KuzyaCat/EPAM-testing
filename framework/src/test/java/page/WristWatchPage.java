@@ -24,6 +24,7 @@ public class WristWatchPage extends Page {
 
     public WristWatchPage clickBuyButton() {
         buyButton.click();
+        logger.info("Click on \"Buy\" button");
         return this;
     }
 
@@ -38,18 +39,25 @@ public class WristWatchPage extends Page {
     }
 
     public int getBasketItemsCounterValue() {
+        logger.info("Get count of items from basket counter element:");
         try {
-            return Integer.parseInt(basketItemsCounter.getText());
+            int basketItemsCounterValue = Integer.parseInt(basketItemsCounter.getText());
+            logger.info(basketItemsCounterValue + " items");
+            return basketItemsCounterValue;
         } catch (NoSuchElementException exception) {
+            logger.info( "No item basket counter element found");
             return 0;
         }
     }
 
     public String getItemTitleText() {
-        return itemTitle.getText();
+        String itemTitleText = itemTitle.getText();
+        logger.info("Get text from item title element: " + itemTitleText);
+        return itemTitleText;
     }
 
     public WristWatchPage openPage() {
+        logger.info("Open page: " + pageUrl);
         driver.get(pageUrl);
         return this;
     }

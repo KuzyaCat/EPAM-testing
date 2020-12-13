@@ -47,7 +47,7 @@ public class DealByTest {
     }
 
     @Test (description = "Test filter sneakers by producer")
-    public void filterSneakersByProducerTest() throws InterruptedException {
+    public void filterSneakersByProducerTest() {
         boolean areProducerListItemValuesMatchInputValue =  new ManSneakersPage(driver, SNEAKERS_PAGE_URL)
                 .openPage()
                 .fillFilterInput(FILTER_VALUE)

@@ -48,7 +48,9 @@ public abstract class Page {
     }
 
     protected Page waitUntilJSReady() {
+        logger.info("Waiting until JS executor is ready");
         wait.until(JSWaiter.waitUntilJSReady());
+        logger.info("JS executor is ready");
         return this;
     }
 }
