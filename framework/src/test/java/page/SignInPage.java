@@ -16,6 +16,8 @@ public class SignInPage extends Page {
     private final By PASSWORD_INPUT_LOCATOR = By.id("enterPassword");
     private final By CONFIRM_PASSWORD_BUTTON_LOCATOR = By.id("enterPasswordConfirmButton");
     private final By CABINET_CONTROLS_LOCATOR = By.className("b-header__controls-item");
+    private final By INPUT_ERRORS_LOCATOR = By.className("inputErrors__error--dX3nZ");
+    private final By EMAIL_ERRORS_LOCATOR = By.id("phone_emailError");
 
     @FindBy(id = EMAIL_INPUT_ID)
     private WebElement emailInput;
@@ -51,9 +53,19 @@ public class SignInPage extends Page {
         return this;
     }
 
-    public List<WebElement> getCabinetControlsElement() {
+    public List<WebElement> getCabinetControlsElements() {
         logger.info("Get My cabinet controls element");
         return getWebElementsList(CABINET_CONTROLS_LOCATOR);
+    }
+
+    public List<WebElement> getInputErrorsElements() {
+        logger.info("Get input errors element");
+        return getWebElementsList(INPUT_ERRORS_LOCATOR);
+    }
+
+    public List<WebElement> getEmailErrorsElements() {
+        logger.info("Get email errors element");
+        return getWebElementsList(EMAIL_ERRORS_LOCATOR);
     }
 
     public SignInPage openPage() {
