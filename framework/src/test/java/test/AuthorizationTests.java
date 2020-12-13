@@ -1,19 +1,25 @@
 package test;
 
+import model.User;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import page.SignInPage;
+import service.UserCreator;
 
 public class AuthorizationTests extends CommonConditions {
+    private User user;
+
     @Test(description = "Test sign in with right data")
     public void signInWithRightDataTest() {
+        user = UserCreator.withCredentialsFromProperty();
+
         SignInPage signInPage = new SignInPage(driver)
                 .openPage();
 
         signInPage
-            .enterEmailToInput("lizerd34@mail.ru")
+            .enterEmailToInput(user.getEmail())
             .clickConfirmEmailButton()
-            .enterPasswordToInput("12563478")
+            .enterPasswordToInput(user.getPassword())
             .clickConfirmPasswordButton();
 
         boolean haveBeenSignedIn = signInPage.getCabinetControlsElements().size() > 0;
@@ -22,6 +28,8 @@ public class AuthorizationTests extends CommonConditions {
 
     @Test(description = "Test sign in with wrong password")
     public void signInWithWrongPasswordTest() {
+        user = UserCreator.withWrongPassword();
+
         SignInPage signInPage = new SignInPage(driver)
                 .openPage();
 
@@ -37,6 +45,8 @@ public class AuthorizationTests extends CommonConditions {
 
     @Test(description = "Test sign in with wrong email")
     public void signInWithWrongEmailTest() {
+        user = UserCreator.withWrongEmail();
+
         SignInPage signInPage = new SignInPage(driver)
                 .openPage();
 
@@ -50,8 +60,10 @@ public class AuthorizationTests extends CommonConditions {
         Assert.assertTrue(haveErrors);
     }
 
-    @Test(description = "Test sign in with wrong email format")
-    public void signInWithWrongEmailFormatTest() {
+    @Test(description = "Test sign in with wrong format email")
+    public void signInWithWrongFormatEmailTest() {
+        user = UserCreator.withWrongFormatEmail();
+
         SignInPage signInPage = new SignInPage(driver)
                 .openPage();
 

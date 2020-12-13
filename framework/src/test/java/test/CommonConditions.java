@@ -10,7 +10,6 @@ public class CommonConditions {
 
     @BeforeMethod()
     public void browserSetup() {
-        System.setProperty("browser", "chrome");
         driver = DriverSingleton.getDriver();
     }
 
