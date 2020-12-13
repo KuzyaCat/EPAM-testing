@@ -34,9 +34,9 @@ public class AuthorizationTests extends CommonConditions {
                 .openPage();
 
         signInPage
-                .enterEmailToInput("lizerd34@mail.ru")
+                .enterEmailToInput(user.getEmail())
                 .clickConfirmEmailButton()
-                .enterPasswordToInput("kek")
+                .enterPasswordToInput(user.getPassword())
                 .clickConfirmPasswordButton();
 
         boolean haveErrors = signInPage.getInputErrorsElements().size() > 0;
@@ -51,9 +51,9 @@ public class AuthorizationTests extends CommonConditions {
                 .openPage();
 
         signInPage
-                .enterEmailToInput("kek@mail.ru")
+                .enterEmailToInput(user.getEmail())
                 .clickConfirmEmailButton()
-                .enterPasswordToInput("12563478")
+                .enterPasswordToInput(user.getPassword())
                 .clickConfirmPasswordButton();
 
         boolean haveErrors = signInPage.getInputErrorsElements().size() > 0;
@@ -68,7 +68,7 @@ public class AuthorizationTests extends CommonConditions {
                 .openPage();
 
         signInPage
-                .enterEmailToInput("kek")
+                .enterEmailToInput(user.getEmail())
                 .clickConfirmEmailButton();
 
         boolean haveErrors = signInPage.getEmailErrorsElements().size() > 0;
