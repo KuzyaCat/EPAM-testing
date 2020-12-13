@@ -13,6 +13,7 @@ import java.util.List;
 
 public abstract class Page {
     protected WebDriver driver;
+    private JavascriptExecutor jsExecutor;
 
     Wait<WebDriver> wait;
     private final long SECONDS_TO_WAIT = 10;
@@ -22,6 +23,7 @@ public abstract class Page {
 
     protected Page(WebDriver driver) {
         this.driver = driver;
+        jsExecutor = (JavascriptExecutor) driver;
 
         wait = new FluentWait<>(driver)
                 .withTimeout(Duration.ofSeconds(SECONDS_TO_WAIT))

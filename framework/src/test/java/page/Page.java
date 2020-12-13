@@ -1,11 +1,12 @@
 package page;
 
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import util.waiter.JSWaiter;
 
 import java.time.Duration;
@@ -13,6 +14,8 @@ import java.util.List;
 
 public abstract class Page {
     protected WebDriver driver;
+    private JavascriptExecutor jsExecutor;
+    protected final Logger logger = LogManager.getRootLogger();
 
     Wait<WebDriver> wait;
     private final long SECONDS_TO_WAIT = 10;
@@ -22,6 +25,7 @@ public abstract class Page {
 
     protected Page(WebDriver driver) {
         this.driver = driver;
+        jsExecutor = (JavascriptExecutor) driver;
 
         wait = new FluentWait<>(driver)
                 .withTimeout(Duration.ofSeconds(SECONDS_TO_WAIT))
