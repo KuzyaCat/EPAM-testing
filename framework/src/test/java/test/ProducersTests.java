@@ -12,7 +12,7 @@ public class ProducersTests extends CommonConditions {
     public void filterSneakersByProducerTest() {
         boolean areProducerListItemValuesMatchInputValue =  new ManSneakersPage(driver, SNEAKERS_PAGE_URL)
                 .openPage()
-                .fillFilterInput(FILTER_VALUE)
+                .enterValueToFilterInput(FILTER_VALUE)
                 .waitUntilJSReady()
                 .getProducerListItemValues()
                 .stream()

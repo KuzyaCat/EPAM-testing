@@ -30,7 +30,7 @@ public class ManSneakersPage extends Page {
         super(driver);
     }
 
-    public ManSneakersPage fillFilterInput(String filterValue) {
+    public ManSneakersPage enterValueToFilterInput(String filterValue) {
         producerFilterInput.sendKeys(Keys.chord(filterValue));
         producerFilterInput.sendKeys(Keys.SPACE);
         logger.info("Enter value to input: " + filterValue);
