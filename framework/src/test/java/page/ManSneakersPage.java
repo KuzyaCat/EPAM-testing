@@ -31,27 +31,29 @@ public class ManSneakersPage extends Page {
     }
 
     public ManSneakersPage enterValueToFilterInput(String filterValue) {
+        logger.info("Enter value to input: " + filterValue);
         producerFilterInput.sendKeys(Keys.chord(filterValue));
         producerFilterInput.sendKeys(Keys.SPACE);
-        logger.info("Enter value to input: " + filterValue);
 //        jsExecutor.executeScript("arguments[0].setAttribute('value', arguments[1])", producerFilterInput, filterValue);
         return this;
     }
 
     public List<String> getProducerListItemValues() {
+        logger.info("Get producer items list names");
         List<String> producerListItemValues = getWebElement(PRODUCER_LIST_LOCATOR)
                 .findElements(PRODUCER_LIST_ITEM_SPAN_LOCATOR)
                 .stream()
                 .map(WebElement::getText)
                 .map(String::toLowerCase)
                 .collect(Collectors.toList());
-        logger.info("Get producer items list names: " + producerListItemValues.toString());
+
+        logger.info(producerListItemValues.size() + " producer list items found: " + producerListItemValues.toString());
         return producerListItemValues;
     }
 
     public ManSneakersPage openPage() {
-        driver.get(pageUrl);
         logger.info("Open page: " + pageUrl);
+        driver.get(pageUrl);
         return this;
     }
 

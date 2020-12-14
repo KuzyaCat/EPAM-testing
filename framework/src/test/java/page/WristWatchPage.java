@@ -30,14 +30,14 @@ public class WristWatchPage extends Page {
     }
 
     public WristWatchPage clickBuyButton() {
-        buyButton.click();
         logger.info("Click on \"Buy\" button");
+        buyButton.click();
         return this;
     }
 
     public WristWatchPage clickFavoriteButton() {
-        favoriteButton.click();
         logger.info("Click on favorite button");
+        favoriteButton.click();
         return this;
     }
 

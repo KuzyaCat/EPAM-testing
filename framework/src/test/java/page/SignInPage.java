@@ -30,26 +30,26 @@ public class SignInPage extends Page {
     }
 
     public SignInPage enterEmailToInput(String email) {
-        emailInput.sendKeys(email);
         logger.info("Enter email to input: " + email);
+        emailInput.sendKeys(email);
         return this;
     }
 
     public SignInPage enterPasswordToInput(String password) {
-        getWebElement(PASSWORD_INPUT_LOCATOR).sendKeys(password);
         logger.info("Enter email to input: " + password);
+        getWebElement(PASSWORD_INPUT_LOCATOR).sendKeys(password);
         return this;
     }
 
     public SignInPage clickConfirmEmailButton() {
-        confirmEmailButton.click();
         logger.info("Click on confirm email button");
+        confirmEmailButton.click();
         return this;
     }
 
     public SignInPage clickConfirmPasswordButton() {
-        getWebElement(CONFIRM_PASSWORD_BUTTON_LOCATOR).click();
         logger.info("Click on confirm password button");
+        getWebElement(CONFIRM_PASSWORD_BUTTON_LOCATOR).click();
         return this;
     }
 
@@ -69,8 +69,8 @@ public class SignInPage extends Page {
     }
 
     public SignInPage openPage() {
-        driver.get(PAGE_URL);
         logger.info("Open page: " + PAGE_URL);
+        driver.get(PAGE_URL);
         return this;
     }
 }

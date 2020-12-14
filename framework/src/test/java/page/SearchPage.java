@@ -26,9 +26,9 @@ public class SearchPage extends Page {
 
     public List<String> getCatalogItemsDescriptionTextList() {
         WebElement catalogWrapperElement = getWebElement(CATALOG_WRAPPER_LOCATOR);
-        List<WebElement> catalogItemsDescriptionElements = catalogWrapperElement.findElements(ITEM_DESCRIPTION_LOCATOR);
 
         logger.info("Get catalog items description list");
+        List<WebElement> catalogItemsDescriptionElements = catalogWrapperElement.findElements(ITEM_DESCRIPTION_LOCATOR);
 
         if (catalogItemsDescriptionElements.size() == 0) {
             logger.info("No catalog items element found");
@@ -46,8 +46,8 @@ public class SearchPage extends Page {
     }
 
     public SearchPage openPage() {
-        driver.get(pageUrl);
         logger.info("Open page: " + pageUrl);
+        driver.get(pageUrl);
         return this;
     }
 }
