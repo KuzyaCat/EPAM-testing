@@ -20,6 +20,10 @@ public class SearchPage extends Page {
         pageUrl = BASE_PAGE_URL + searchValue;
     }
 
+    public SearchPage(WebDriver driver) {
+        super(driver);
+    }
+
     public List<String> getCatalogItemsDescriptionTextList() {
         WebElement catalogWrapperElement = getWebElement(CATALOG_WRAPPER_LOCATOR);
         List<WebElement> catalogItemsDescriptionElements = catalogWrapperElement.findElements(ITEM_DESCRIPTION_LOCATOR);
