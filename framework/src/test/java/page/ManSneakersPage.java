@@ -14,12 +14,22 @@ public class ManSneakersPage extends Page {
     private final String PRODUCER_FILTER_PARENT_ELEMENT = "//div[(@data-qaid='a18') and (@class=\"FilterSection__root--2ST64\")]";
     private final String PRODUCER_FILTER_INPUT_XPATH = PRODUCER_FILTER_PARENT_ELEMENT
             + "//div[@class=\"input__root--2vSJx\"]//input[@type=\"text\"]";
+    private final String CATALOG_CHEAP_BUTTON_XPATH = "//div[(@class='tagsSlider__sortPill--NmfKH') and (@data-qaid='price')]";
+    private final String CATALOG_EXPENSIVE_BUTTON_XPATH = "//div[(@class='tagsSlider__sortPill--NmfKH') and (@data-qaid='-price')]";
 
     private final By PRODUCER_LIST_LOCATOR = By.xpath(PRODUCER_FILTER_PARENT_ELEMENT + "//ul[@class=\"ek-list\"]");
     private final By PRODUCER_LIST_ITEM_SPAN_LOCATOR = By.className("SingleCheckbox__label--1ObCD");
+    private final By CATALOG_ITEM_PRICE_LOCATOR = By.xpath("//span[(@class='x-gallery-tile__price') and (@data-qaid='product_price')]");
 
     @FindBy(xpath = PRODUCER_FILTER_INPUT_XPATH)
     private WebElement producerFilterInput;
+
+    @FindBy(xpath = CATALOG_EXPENSIVE_BUTTON_XPATH)
+    private WebElement catalogExpensiveButton;
+
+    @FindBy(xpath = CATALOG_CHEAP_BUTTON_XPATH)
+    private WebElement catalogCheapButton;
+
 
     public ManSneakersPage(WebDriver driver, String url) {
         super(driver);
@@ -49,6 +59,26 @@ public class ManSneakersPage extends Page {
 
         logger.info(producerListItemValues.size() + " producer list items found: " + producerListItemValues.toString());
         return producerListItemValues;
+    }
+
+    public ManSneakersPage clickExpensiveButton() {
+        logger.info("Click expensive button");
+        catalogExpensiveButton.click();
+        return this;
+    }
+
+    public ManSneakersPage clickCheapButton() {
+        logger.info("Click cheap button");
+        catalogCheapButton.click();
+        return this;
+    }
+
+    public List<Double> getCatalogItemsPrices() {
+        logger.info("Get catalog items prices");
+        return getWebElementsList(CATALOG_ITEM_PRICE_LOCATOR)
+                .stream()
+                .map(item -> Double.parseDouble(item.getAttribute("data-qaprice")))
+                .collect(Collectors.toList());
     }
 
     public ManSneakersPage openPage() {
