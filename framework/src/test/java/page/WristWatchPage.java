@@ -6,8 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 public class WristWatchPage extends Page {
-    private final String BASE_PAGE_URL = "https://deal.by";
-    private String pageUrl;
+    private final String BASE_PAGE_URL = "https://deal.by/p106387137-muzhskie-chasy-amst.html";
 
     private final String BUY_BUTTON_CLASSNAME = "js-product-buy-button";
     private final String FAVORITE_BUTTON_CLASSNAME = "x-product-conversion__favourite";
@@ -24,9 +23,8 @@ public class WristWatchPage extends Page {
     private WebElement basketItemsCounter;
     private WebElement itemTitle;
 
-    public WristWatchPage(WebDriver driver, String url) {
+    public WristWatchPage(WebDriver driver) {
         super(driver);
-        pageUrl = BASE_PAGE_URL + url;
     }
 
     public WristWatchPage clickBuyButton() {
@@ -75,8 +73,8 @@ public class WristWatchPage extends Page {
     }
 
     public WristWatchPage openPage() {
-        logger.info("Open page: " + pageUrl);
-        driver.get(pageUrl);
+        logger.info("Open page: " + BASE_PAGE_URL);
+        driver.get(BASE_PAGE_URL);
         return this;
     }
 }

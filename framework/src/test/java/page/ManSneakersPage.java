@@ -8,8 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ManSneakersPage extends Page {
-    private final String BASE_PAGE_URL = "https://deal.by";
-    private String pageUrl;
+    private final String BASE_PAGE_URL = "https://deal.by/Krossovki-muzhskie.html";
 
     private final String PRODUCER_FILTER_PARENT_ELEMENT = "//div[(@data-qaid='a18') and (@class=\"FilterSection__root--2ST64\")]";
     private final String PRODUCER_FILTER_INPUT_XPATH = PRODUCER_FILTER_PARENT_ELEMENT
@@ -29,12 +28,6 @@ public class ManSneakersPage extends Page {
 
     @FindBy(xpath = CATALOG_CHEAP_BUTTON_XPATH)
     private WebElement catalogCheapButton;
-
-
-    public ManSneakersPage(WebDriver driver, String url) {
-        super(driver);
-        pageUrl = BASE_PAGE_URL + url;
-    }
 
     public ManSneakersPage(WebDriver driver) {
         super(driver);
@@ -82,8 +75,8 @@ public class ManSneakersPage extends Page {
     }
 
     public ManSneakersPage openPage() {
-        logger.info("Open page: " + pageUrl);
-        driver.get(pageUrl);
+        logger.info("Open page: " + BASE_PAGE_URL);
+        driver.get(BASE_PAGE_URL);
         return this;
     }
 

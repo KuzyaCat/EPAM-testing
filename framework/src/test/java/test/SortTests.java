@@ -8,11 +8,9 @@ import page.ManSneakersPage;
 import java.util.List;
 
 public class SortTests extends CommonConditions {
-    private final String SNEAKERS_PAGE_URL = "/Krossovki-muzhskie.html";
-
     @Test(description = "Test sort ascending catalog items by price")
     public void sortAscendingCatalogItemsByPriceTest() {
-        List<Double> catalogItemsPriceList =  new ManSneakersPage(driver, SNEAKERS_PAGE_URL)
+        List<Double> catalogItemsPriceList =  new ManSneakersPage(driver)
                 .openPage()
                 .clickExpensiveButton()
                 .waitUntilJSReady()
@@ -25,7 +23,7 @@ public class SortTests extends CommonConditions {
 
     @Test(description = "Test sort descending catalog items by price")
     public void sortDescendingCatalogItemsByPriceTest() {
-        List<Double> catalogItemsPriceList =  new ManSneakersPage(driver, SNEAKERS_PAGE_URL)
+        List<Double> catalogItemsPriceList =  new ManSneakersPage(driver)
                 .openPage()
                 .clickCheapButton()
                 .waitUntilJSReady()
