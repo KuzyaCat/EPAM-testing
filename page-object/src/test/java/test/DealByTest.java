@@ -1,35 +1,17 @@
 package test;
 
-import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import page.ManSneakersPage;
 import page.WristWatchPage;
 
-public class DealByTest {
-    private final String CHROME_DRIVER_PATH = "/src/test/resources/drivers/chromedriver";
-    private final String WRIST_WATCH_PAGE_URL = "/p106387137-muzhskie-chasy-amst.html";
-    private final String SNEAKERS_PAGE_URL = "/Krossovki-muzhskie.html";
-
+public class DealByTest extends CommonConditions {
     private final String EXPECTED_ITEM_TITLE_VALUE = "Мужские часы AMST AM 3003 (Коричневый)";
     private final String FILTER_VALUE = "reebo";
 
-    private WebDriver driver;
-
-    @BeforeTest(alwaysRun = true)
-    public void initBrowserDriver() {
-        String path = System.getProperty("user.dir");
-        System.setProperty("webdriver.chrome.driver", path + CHROME_DRIVER_PATH);
-
-        driver = new ChromeDriver();
-    }
-
     @Test (description = "Test add to basket")
     public void addProductToBasketTest() {
-        WristWatchPage dealByWristWatchPage = new WristWatchPage(driver, WRIST_WATCH_PAGE_URL)
+        WristWatchPage dealByWristWatchPage = new WristWatchPage(driver)
                 .openPage();
 
         int expectedBasketItemsCounterValue = dealByWristWatchPage.getBasketItemsCounterValue() + 1;
@@ -47,8 +29,8 @@ public class DealByTest {
     }
 
     @Test (description = "Test filter sneakers by producer")
-    public void filterSneakersByProducerTest() throws InterruptedException {
-        boolean areProducerListItemValuesMatchInputValue =  new ManSneakersPage(driver, SNEAKERS_PAGE_URL)
+    public void filterSneakersByProducerTest() {
+        boolean areProducerListItemValuesMatchInputValue =  new ManSneakersPage(driver)
                 .openPage()
                 .fillFilterInput(FILTER_VALUE)
                 .waitUntilJSReady()
@@ -57,12 +39,6 @@ public class DealByTest {
                 .allMatch(itemValue -> itemValue.contains(FILTER_VALUE));
 
         Assert.assertTrue(areProducerListItemValuesMatchInputValue);
-    }
-
-    @AfterMethod(alwaysRun = true)
-    public void quitBrowser() {
-        driver.quit();
-        driver = null;
     }
 }
 

@@ -4,8 +4,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 
 public class WristWatchPage extends Page {
-    private final String BASE_PAGE_URL = "https://deal.by";
-    private String pageUrl;
+    private final String BASE_PAGE_URL = "https://deal.by/p106387137-muzhskie-chasy-amst.html";
 
     private final String BUY_BUTTON_CLASSNAME = "js-product-buy-button";
     private final By BASKET_ITEMS_COUNTER_LOCATOR = By.className("x-header__controls-counter");
@@ -17,9 +16,8 @@ public class WristWatchPage extends Page {
     private WebElement basketItemsCounter;
     private WebElement itemTitle;
 
-    public WristWatchPage(WebDriver driver, String url) {
+    public WristWatchPage(WebDriver driver) {
         super(driver);
-        pageUrl = BASE_PAGE_URL + url;
     }
 
     public WristWatchPage clickBuyButton() {
@@ -50,7 +48,7 @@ public class WristWatchPage extends Page {
     }
 
     public WristWatchPage openPage() {
-        driver.get(pageUrl);
+        driver.get(BASE_PAGE_URL);
         return this;
     }
 }
