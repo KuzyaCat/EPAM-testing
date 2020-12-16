@@ -81,8 +81,8 @@ public class CatalogPage extends Page {
     }
 
     public CatalogPage openPage() {
-        logger.info("Open page: " + BASE_PAGE_URL);
-        driver.get(BASE_PAGE_URL);
+        logger.info("Open page: " + pageUrl);
+        driver.get(pageUrl);
         return this;
     }
 
