@@ -7,8 +7,9 @@ import org.openqa.selenium.Keys;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ManSneakersPage extends Page {
-    private final String BASE_PAGE_URL = "https://deal.by/Krossovki-muzhskie.html";
+public class CatalogPage extends Page {
+    private final String BASE_PAGE_URL = "https://deal.by";
+    private String pageUrl;
 
     private final String PRODUCER_FILTER_PARENT_ELEMENT = "//div[(@data-qaid='a18') and (@class=\"FilterSection__root--2ST64\")]";
     private final String PRODUCER_FILTER_INPUT_XPATH = PRODUCER_FILTER_PARENT_ELEMENT
@@ -29,11 +30,16 @@ public class ManSneakersPage extends Page {
     @FindBy(xpath = CATALOG_CHEAP_BUTTON_XPATH)
     private WebElement catalogCheapButton;
 
-    public ManSneakersPage(WebDriver driver) {
+    public CatalogPage(WebDriver driver) {
         super(driver);
     }
 
-    public ManSneakersPage enterValueToFilterInput(String filterValue) {
+    public CatalogPage(WebDriver driver, String url) {
+        super(driver);
+        pageUrl = BASE_PAGE_URL + url;
+    }
+
+    public CatalogPage enterValueToFilterInput(String filterValue) {
         logger.info("Enter value to input: " + filterValue);
         producerFilterInput.sendKeys(Keys.chord(filterValue));
         producerFilterInput.sendKeys(Keys.SPACE);
@@ -54,13 +60,13 @@ public class ManSneakersPage extends Page {
         return producerListItemValues;
     }
 
-    public ManSneakersPage clickExpensiveButton() {
+    public CatalogPage clickExpensiveButton() {
         logger.info("Click expensive button");
         catalogExpensiveButton.click();
         return this;
     }
 
-    public ManSneakersPage clickCheapButton() {
+    public CatalogPage clickCheapButton() {
         logger.info("Click cheap button");
         catalogCheapButton.click();
         return this;
@@ -74,14 +80,14 @@ public class ManSneakersPage extends Page {
                 .collect(Collectors.toList());
     }
 
-    public ManSneakersPage openPage() {
+    public CatalogPage openPage() {
         logger.info("Open page: " + BASE_PAGE_URL);
         driver.get(BASE_PAGE_URL);
         return this;
     }
 
     @Override
-    public ManSneakersPage waitUntilJSReady() {
-        return (ManSneakersPage)super.waitUntilJSReady();
+    public CatalogPage waitUntilJSReady() {
+        return (CatalogPage)super.waitUntilJSReady();
     }
 }

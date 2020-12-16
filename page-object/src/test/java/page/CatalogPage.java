@@ -7,8 +7,9 @@ import org.openqa.selenium.Keys;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ManSneakersPage extends Page {
-    private final String BASE_PAGE_URL = "https://deal.by/Krossovki-muzhskie.html";
+public class CatalogPage extends Page {
+    private final String BASE_PAGE_URL = "https://deal.by";
+    private String pageUrl;
 
     private final String PRODUCER_FILTER_PARENT_ELEMENT = "//div[(@data-qaid='a18') and (@class=\"FilterSection__root--2ST64\")]";
     private final String PRODUCER_FILTER_INPUT_XPATH = PRODUCER_FILTER_PARENT_ELEMENT
@@ -20,11 +21,16 @@ public class ManSneakersPage extends Page {
     @FindBy(xpath = PRODUCER_FILTER_INPUT_XPATH)
     private WebElement producerFilterInput;
 
-    public ManSneakersPage(WebDriver driver) {
+    public CatalogPage(WebDriver driver) {
         super(driver);
     }
 
-    public ManSneakersPage fillFilterInput(String filterValue) {
+    public CatalogPage(WebDriver driver, String url) {
+        super(driver);
+        pageUrl = BASE_PAGE_URL + url;
+    }
+
+    public CatalogPage fillFilterInput(String filterValue) {
         producerFilterInput.sendKeys(Keys.chord(filterValue));
         producerFilterInput.sendKeys(Keys.SPACE);
 //        jsExecutor.executeScript("arguments[0].setAttribute('value', arguments[1])", producerFilterInput, filterValue);
@@ -40,13 +46,13 @@ public class ManSneakersPage extends Page {
                 .collect(Collectors.toList());
     }
 
-    public ManSneakersPage openPage() {
-        driver.get(BASE_PAGE_URL);
+    public CatalogPage openPage() {
+        driver.get(pageUrl);
         return this;
     }
 
     @Override
-    public ManSneakersPage waitUntilJSReady() {
-        return (ManSneakersPage)super.waitUntilJSReady();
+    public CatalogPage waitUntilJSReady() {
+        return (CatalogPage)super.waitUntilJSReady();
     }
 }

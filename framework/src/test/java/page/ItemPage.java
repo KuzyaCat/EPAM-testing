@@ -5,8 +5,9 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class WristWatchPage extends Page {
-    private final String BASE_PAGE_URL = "https://deal.by/p106387137-muzhskie-chasy-amst.html";
+public class ItemPage extends Page {
+    private final String BASE_PAGE_URL = "https://deal.by";
+    private String pageUrl;
 
     private final String BUY_BUTTON_CLASSNAME = "js-product-buy-button";
     private final String FAVORITE_BUTTON_CLASSNAME = "x-product-conversion__favourite";
@@ -23,28 +24,34 @@ public class WristWatchPage extends Page {
     private WebElement basketItemsCounter;
     private WebElement itemTitle;
 
-    public WristWatchPage(WebDriver driver) {
+    public ItemPage(WebDriver driver) {
         super(driver);
     }
 
-    public WristWatchPage clickBuyButton() {
+    public ItemPage(WebDriver driver, String url) {
+        super(driver);
+        pageUrl = BASE_PAGE_URL + url;
+    }
+
+
+    public ItemPage clickBuyButton() {
         logger.info("Click on \"Buy\" button");
         buyButton.click();
         return this;
     }
 
-    public WristWatchPage clickFavoriteButton() {
+    public ItemPage clickFavoriteButton() {
         logger.info("Click on favorite button");
         favoriteButton.click();
         return this;
     }
 
-    public WristWatchPage selectBasketItemsCounter() {
+    public ItemPage selectBasketItemsCounter() {
         basketItemsCounter = getWebElement(BASKET_ITEMS_COUNTER_LOCATOR);
         return this;
     }
 
-    public WristWatchPage selectItemTitle() {
+    public ItemPage selectItemTitle() {
         itemTitle = getWebElement(ITEM_TITLE_LOCATOR);
         return this;
     }
@@ -72,9 +79,9 @@ public class WristWatchPage extends Page {
         return getWebElementsList(REGISTER_MODAL_LOCATOR);
     }
 
-    public WristWatchPage openPage() {
-        logger.info("Open page: " + BASE_PAGE_URL);
-        driver.get(BASE_PAGE_URL);
+    public ItemPage openPage() {
+        logger.info("Open page: " + pageUrl);
+        driver.get(pageUrl);
         return this;
     }
 }

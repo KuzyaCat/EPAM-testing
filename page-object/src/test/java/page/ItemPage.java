@@ -3,8 +3,9 @@ package page;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 
-public class WristWatchPage extends Page {
-    private final String BASE_PAGE_URL = "https://deal.by/p106387137-muzhskie-chasy-amst.html";
+public class ItemPage extends Page {
+    private final String BASE_PAGE_URL = "https://deal.by";
+    private String pageUrl;
 
     private final String BUY_BUTTON_CLASSNAME = "js-product-buy-button";
     private final By BASKET_ITEMS_COUNTER_LOCATOR = By.className("x-header__controls-counter");
@@ -16,21 +17,26 @@ public class WristWatchPage extends Page {
     private WebElement basketItemsCounter;
     private WebElement itemTitle;
 
-    public WristWatchPage(WebDriver driver) {
+    public ItemPage(WebDriver driver) {
         super(driver);
     }
 
-    public WristWatchPage clickBuyButton() {
+    public ItemPage(WebDriver driver, String url) {
+        super(driver);
+        pageUrl = BASE_PAGE_URL + url;
+    }
+
+    public ItemPage clickBuyButton() {
         buyButton.click();
         return this;
     }
 
-    public WristWatchPage selectBasketItemsCounter() {
+    public ItemPage selectBasketItemsCounter() {
         basketItemsCounter = getWebElement(BASKET_ITEMS_COUNTER_LOCATOR);
         return this;
     }
 
-    public WristWatchPage selectItemTitle() {
+    public ItemPage selectItemTitle() {
         itemTitle = getWebElement(ITEM_TITLE_LOCATOR);
         return this;
     }
@@ -47,8 +53,8 @@ public class WristWatchPage extends Page {
         return itemTitle.getText();
     }
 
-    public WristWatchPage openPage() {
-        driver.get(BASE_PAGE_URL);
+    public ItemPage openPage() {
+        driver.get(pageUrl);
         return this;
     }
 }
