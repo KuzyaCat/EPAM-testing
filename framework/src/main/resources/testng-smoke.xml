@@ -3,7 +3,7 @@
 <suite name="Smoke" verbose="1" >
     <test name="SignIn">
         <classes>
-            <class name="test.SearchTests"/>
+            <class name="test.SortTests"/>
         </classes>
     </test>
 </suite>
