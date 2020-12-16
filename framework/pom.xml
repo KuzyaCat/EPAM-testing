@@ -30,7 +30,7 @@
                             <argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
                             <testFailureIgnore>true</testFailureIgnore>
                             <includes>
-                                <includesFile>**/*Test.java</includesFile>
+                                <includesFile>**/*Tests.java</includesFile>
                             </includes>
                         </configuration>
                         <goals>
