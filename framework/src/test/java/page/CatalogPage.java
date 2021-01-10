@@ -43,11 +43,11 @@ public class CatalogPage extends Page {
         logger.info("Enter value to input: " + filterValue);
         producerFilterInput.sendKeys(Keys.chord(filterValue));
         producerFilterInput.sendKeys(Keys.SPACE);
-//        jsExecutor.executeScript("arguments[0].setAttribute('value', arguments[1])", producerFilterInput, filterValue);
         return this;
     }
 
     public List<String> getProducerListItemValues() {
+        waitUntilJSReady();
         logger.info("Get producer items list names");
         List<String> producerListItemValues = getWebElement(PRODUCER_LIST_LOCATOR)
                 .findElements(PRODUCER_LIST_ITEM_SPAN_LOCATOR)
@@ -73,6 +73,7 @@ public class CatalogPage extends Page {
     }
 
     public List<Double> getCatalogItemsPrices() {
+        waitUntilJSReady();
         logger.info("Get catalog items prices");
         return getWebElementsList(CATALOG_ITEM_PRICE_LOCATOR)
                 .stream()
@@ -84,10 +85,5 @@ public class CatalogPage extends Page {
         logger.info("Open page: " + pageUrl);
         driver.get(pageUrl);
         return this;
-    }
-
-    @Override
-    public CatalogPage waitUntilJSReady() {
-        return (CatalogPage)super.waitUntilJSReady();
     }
 }

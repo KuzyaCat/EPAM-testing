@@ -15,7 +15,6 @@ public class SortTests extends CommonConditions {
         List<Double> catalogItemsPriceList =  new CatalogPage(driver, SNEAKERS_CATALOG_PAGE_URL)
                 .openPage()
                 .clickExpensiveButton()
-                .waitUntilJSReady()
                 .getCatalogItemsPrices();
 
         boolean areCatalogItemsSortedByPrice = Ordering.natural().reverse().isOrdered(catalogItemsPriceList);
@@ -28,7 +27,6 @@ public class SortTests extends CommonConditions {
         List<Double> catalogItemsPriceList =  new CatalogPage(driver, SNEAKERS_CATALOG_PAGE_URL)
                 .openPage()
                 .clickCheapButton()
-                .waitUntilJSReady()
                 .getCatalogItemsPrices();
 
         boolean areCatalogItemsSortedByPrice = Ordering.natural().isOrdered(catalogItemsPriceList);

@@ -13,7 +13,6 @@ public class ProducersTests extends CommonConditions {
         boolean areProducerListItemValuesMatchInputValue =  new CatalogPage(driver, SNEAKERS_CATALOG_PAGE_URL)
                 .openPage()
                 .enterValueToFilterInput(FILTER_VALUE)
-                .waitUntilJSReady()
                 .getProducerListItemValues()
                 .stream()
                 .allMatch(itemValue -> itemValue.contains(FILTER_VALUE));
